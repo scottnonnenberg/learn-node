@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="en"><head><title>index</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="index"><meta name="groc-project-path" content="README.md"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path">README.md</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="learn-node">learn-node</h1>
+
+<p>This project shows a progression from the most basic <a href="http://expressjs.com">express</a>-based <a href="http://nodejs.org/">nodejs</a> app to a testable project using <a href="http://requirejs.org/">requirejs</a> to share code between the client and the server.</p>
+
+<h2 id="setup">Setup</h2>
+
+<p>First, set up node to be in development mode:</p>
+
+<pre><code class="shell">source env_vars.sh
+</code></pre>
+
+<p><em>(usually you don't want to put your environment variables in your repository, but this is an example app, with no sensitive environment variables)</em></p>
+
+<p>Next, install all required node modules:</p>
+
+<pre><code class="shell">npm install
+</code></pre>
+
+<p>Lastly, ensure that <a href="http://visionmedia.github.io/mocha/">mocha</a> is available on the command line by installing it globally:</p>
+
+<pre><code class="shell">sudo npm install -g mocha
+</code></pre>
+
+<h2 id="example-1">Example #1</h2>
+
+<pre><code class="shell">node src/1.\ anonymous/app.js
+</code></pre>
+
+<p>Hit <a href="http://localhost:3000">http://localhost:3000</a> in your browser... Note that we use <code>res.send</code> which takes the object you pass it and renders it into <a href="http://en.wikipedia.org/wiki/JSON">JSON</a> for the browser. This makes it really easy to create APIs for <a href="http://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a> calls - javascript is really good at consuming JSON.</p>
+
+<h2 id="example-2">Example #2</h2>
+
+<pre><code class="shell">node src/2.\ anonymous/app.js
+</code></pre>
+
+<p>Again, hit <a href="http://localhost:3000">http://localhost:3000</a> in your browser...</p>
+
+<p>Now, for something new! Run its tests:</p>
+
+<pre><code class="shell">mocha src/2.\ anonymous/test.js
+</code></pre>
+
+<p>The key change in this example is that the endpoint handler has been factored into a separate file and object so that it can be tested outside of a full web server. With this method you can much more quickly test a lot of interesting cases without pulling up your web browser or another tool.</p>
+
+<h2 id="example-3">Example #3</h2>
+
+<pre><code class="shell">node src/3.\ class/app.js
+</code></pre>
+
+<p>Check out <a href="http://localhost:3000">http://localhost:3000</a>... now we're using <a href="http://momentjs.com/">moment.js</a> to print out the time with a nice format. We're also constructing Routes as a class instead of a raw object - it has a constructor and a method added to its prototype object. This is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain">javascript prototype inheritance</a>.</p>
+
+<p>Now let's run its tests:</p>
+
+<pre><code class="shell">mocha src/3.\ class/test.js
+</code></pre>
+
+<p>This time we're running two tests, and we're using <a href="http://sinonjs.org/">sinon.js</a> to replicate error conditions by replacing the moment object inside of the Routes class. This is called <a href="http://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a>, and is especially useful if the execution of the code would have consequences, like sending a text message or sending a request to another application.</p>
+
+<h2 id="example-4">Example #4</h2>
+
+<p>First let's run tests:</p>
+
+<pre><code class="shell">mocha src/4.\ sharing\ code/both/test.js
+</code></pre>
+
+<p>Like before, we're running tests on a class. But this time, the files are organized into three categories: server, client and both. As you might expect, these folders describe where this code runs. This test will also run in the browser.</p>
+
+<p>To do that, first run the server:</p>
+
+<pre><code class="shell">node src/4.\ sharing\ code/server/app.js
+</code></pre>
+
+<p>Now at <a href="http://localhost:3000">http://localhost:3000</a> we're using a jade template to render an HTML page to the browser. The page uses require.js to pull down a set of javascript files, and then gives you a link to run the same tests we just ran on the command line.</p>
+
+<p>The keys to his configuration are:</p>
+
+<ol>
+<li>we use the amdefine node module to replicate requirejs behavior on the server side</li>
+<li>we configure require.js to provide javascript files when we request node modules like <code>moment</code></li>
+<li>we ensure that any relative pathing is correct. node that test.js refers to './logic.js' in the same directory. As long as this is preserved in what is offered to the web, it will work.</li>
+</ol>
+
+<p>For production, <a href="http://requirejs.org/docs/optimization.html">r.js</a> and <a href="https://github.com/jrburke/almond">almond.js</a> can be used to eliminate the requirejs runtime and create standalone concatenated and optimized files for the client. Maybe if someone is really nice I'll provide that example next. :0)</p>
+
+<p>Happy coding!</p>
+
+<h2 id="license">License</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (c) 2013 Scott Nonnenberg &lt;scott@nonnenberg.com&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p></div></div></div></div></body></html>

@@ -1,0 +1,23 @@
+{
+   "name": "learn-node"
+  ,"version": "0.0.1"
+  ,"dependencies": {
+    "amdefine": "0.0.8"
+    , "jade": "0.35.0"
+    , "lodash": "2.0.0"
+    , "moment": "2.1.0"
+    , "express": "3.4.0"
+
+    , "chai": "1.8.0"
+    , "sinon": "1.7.3"
+  }
+  ,"engines": {
+     "node": "*"
+    ,"npm": "*"
+  }
+  ,"author": "Scott Nonnenberg"
+  ,"repository": {
+     "type": "git"
+    ,"url": "git@github.com:NiKnight/learn-node.git"
+  }
+}

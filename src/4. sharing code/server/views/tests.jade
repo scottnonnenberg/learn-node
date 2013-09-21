@@ -1,0 +1,14 @@
+test.jade
+html
+  head
+    title tests
+
+    script(type='text/javascript').
+      var tests = [
+        'both/test.js'
+      ];
+
+    script(data-main="client/testsetup.js",src="client/lib/require.js")
+
+  body
+    a(href="javascript:runTests()") Run tests
