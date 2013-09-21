@@ -1,6 +1,6 @@
 # learn-node
 
-This project shows a progression from the most basic [express](http://expressjs.com)-based [nodejs](http://nodejs.org/) app to a testable project using [requirejs](http://requirejs.org/) to share code between the client and the server.
+This project shows a progression from the most basic [`express`](http://expressjs.com)-based [nodejs](http://nodejs.org/) app to a testable project using [`requirejs`](http://requirejs.org/) to share code between the client and the server.
 
 
 ## Setup
@@ -19,7 +19,7 @@ Next, install all required node modules:
 npm install
 ```
 
-Lastly, ensure that [mocha](http://visionmedia.github.io/mocha/) is available on the command line by installing it globally:
+Lastly, ensure that [`mocha`](http://visionmedia.github.io/mocha/) is available on the command line by installing it globally:
 
 ```shell
 sudo npm install -g mocha
@@ -56,7 +56,7 @@ The key change in this example is that the endpoint handler has been factored in
 node src/3.\ class/app.js
 ```
 
-Check out [http://localhost:3000](http://localhost:3000)... now we're using [moment.js](http://momentjs.com/) to print out the time with a nice format. We're also constructing Routes as a class instead of a raw object - it has a constructor and a method added to its prototype object. This is [javascript prototype inheritance](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain).
+Check out [http://localhost:3000](http://localhost:3000)... now we're using [`moment`](http://momentjs.com/) to print out the time with a nice format. We're also constructing `Routes` as a class instead of a raw object - it has a constructor and a method added to its prototype object. This is [javascript prototype inheritance](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain).
 
 Now let's run its tests:
 
@@ -64,7 +64,7 @@ Now let's run its tests:
 mocha src/3.\ class/test.js
 ```
 
-This time we're running two tests, and we're using [sinon.js](http://sinonjs.org/) to replicate error conditions by replacing the moment object inside of the Routes class. This is called [dependency injection](http://en.wikipedia.org/wiki/Dependency_injection), and is especially useful if the execution of the code would have consequences, like sending a text message or sending a request to another application.
+This time we're running two tests, and we're using [`sinon`](http://sinonjs.org/) to replicate error conditions by replacing the `moment` object inside of the `Routes` class. This is called [dependency injection](http://en.wikipedia.org/wiki/Dependency_injection), and is especially useful if the execution of the code would have consequences, like sending a text message or sending a request to another application.
 
 ## Example #4
 
@@ -82,15 +82,15 @@ To do that, first run the server:
 node src/4.\ sharing\ code/server/app.js
 ```
 
-Now at [http://localhost:3000](http://localhost:3000) we're using a jade template to render an HTML page to the browser. The page uses require.js to pull down a set of javascript files, and then gives you a link to run the same tests we just ran on the command line.
+Now at [http://localhost:3000](http://localhost:3000) we're using a jade template to render an HTML page to the browser. The page uses `requirejs` to pull down a set of javascript files, and then gives you a link to run the same tests we just ran on the command line.
 
 The keys to his configuration are:
 
-1. we use the amdefine node module to replicate requirejs behavior on the server side
-2. we configure require.js to provide javascript files when we request node modules like `moment`
-3. we ensure that any relative pathing is correct. node that test.js refers to './logic.js' in the same directory. As long as this is preserved in what is offered to the web, it will work.
+1. we use the `amdefine` node module to replicate `requirejs` behavior on the server side.
+2. we configure `requirejs` to provide javascript files when we request node modules like `moment`
+3. we ensure that any relative pathing is correct. Note that test.js refers to './logic.js' in the same directory. As long as this is preserved in what is available to the browser, it will work.
 
-For production, [r.js](http://requirejs.org/docs/optimization.html) and [almond.js](https://github.com/jrburke/almond) can be used to eliminate the requirejs runtime and create standalone concatenated and optimized files for the client. Maybe if someone is really nice I'll provide that example next. :0)
+For production, [`r.js`](http://requirejs.org/docs/optimization.html) and [`almond.js`](https://github.com/jrburke/almond) can be used to eliminate the `requirejs` runtime and create standalone concatenated and optimized files for the client. Maybe if someone is really nice I'll provide that example next. :0)
 
 Happy coding!
 
