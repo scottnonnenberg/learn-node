@@ -19,7 +19,7 @@ Next, install all required node modules:
 npm install
 ```
 
-Lastly, ensure that [`mocha`](http://visionmedia.github.io/mocha/) is available on the command line by installing it globally:
+Lastly, ensure that [`mocha`](http://mochajs.org/) is available on the command line by installing it globally:
 
 ```shell
 sudo npm install -g mocha
